@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">InterfaceComponent</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="video_array">
+        <item>Parrots</item>
+        <item>Bluejays</item>
+        <item>Pigeons</item>
+        <item>Ducks</item>
+        <item>Mice</item>
+        <item>Tropical Fish</item>
+    </string-array>
+
+    <string name="title_activity_video_play">VideoPlay</string>
+
+</resources>
