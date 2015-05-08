@@ -1,61 +1,60 @@
 package test.jessicajones.interfacecomponent;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.VideoView;
 import android.widget.MediaController;
 
-public class VideoPlay extends Activity {
+/**
+ * VideoPlay creates a VideoView with the video file corresponding to the
+ * video tile passed in the intent.The video displays on full screen and
+ * loops indefinitely.
+ */
+public class VideoPlay extends Activity implements MediaPlayer.OnPreparedListener {
 
+    /* Set up and start video */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // set flags for fullscreen
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_video_play);
 
+        // get the video file, use it to set VideoView
         Intent intent = getIntent();
-        String title = intent.getStringExtra(VideoMenu.TITLE);
-        TextView titleText = (TextView) findViewById(R.id.playVideoTitle);
-        titleText.setText(title);
-
         VideoView playVideoView = (VideoView)findViewById(R.id.playVideoView);
-
-        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.sample_mpeg4);
+        String videoName;
+        videoName = intent.getStringExtra(VideoMenu.TITLE).toLowerCase();
+        int id = getResources().getIdentifier(videoName, "raw", getPackageName());
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + id);
         playVideoView.setVideoURI(uri);
 
+        // finish setting up VideoView, start playing
         MediaController mediaController = new MediaController(this);
         mediaController.setAnchorView(playVideoView);
         playVideoView.setMediaController(mediaController);
-
+        playVideoView.setOnPreparedListener(this);
         playVideoView.requestFocus();
         playVideoView.start();
     }
 
-
+    //implement looping
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_video_play, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void onPrepared(MediaPlayer mp) {
+        mp.setLooping(true);
     }
 }

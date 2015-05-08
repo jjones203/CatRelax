@@ -2,14 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="test.jessicajones.interfacecomponent" >
 
+    <!-- keep screen from dimming during playback -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <!-- keeps screen from dimming during playback -->
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/icon_round"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+
+        <!--android:debuggable="true"-->
+
         <activity
             android:name=".VideoMenu"
             android:label="@string/app_name" >
