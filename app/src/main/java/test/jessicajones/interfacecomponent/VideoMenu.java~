@@ -33,7 +33,35 @@ public class VideoMenu extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle("CatRelax Video Menu");
+<<<<<<< HEAD
         setUpList();
+=======
+
+        // Get video titles
+        String[] videoArray = getResources().getStringArray(R.array.video_array);
+
+        // Define a new adapter
+        ArrayAdapter rowAdapter;
+        rowAdapter = new ArrayAdapter(this,
+                android.R.layout.simple_list_item_1, videoArray);
+        setListAdapter(rowAdapter);
+
+        // Define the listener interface
+        AdapterView.OnItemClickListener menuListener = new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+                Intent intent = new Intent(getApplicationContext(),VideoPlay.class);
+                String title = (String) (((TextView) view).getText());
+                intent.putExtra(TITLE,title);
+                startActivity(intent);
+            }
+        };
+
+        // Get the ListView and wire the listener
+        ListView listView = getListView();
+        listView.setOnItemClickListener(menuListener);
+>>>>>>> 10d01b6607232c3f89cae4951836a1a962d32692
     }
 
     @Override
