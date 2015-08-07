@@ -2,14 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:orientation="vertical"
 android:layout_width="fill_parent"
-android:layout_height="wrap_content">
+android:layout_height="wrap_content"
+android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
 
-<TextView
-    android:id="@+id/playVideoTitle"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp">
-</TextView>
 
 <VideoView
     android:id="@+id/playVideoView"
